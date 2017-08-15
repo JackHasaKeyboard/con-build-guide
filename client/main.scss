@@ -1,0 +1,106 @@
+$orange: rgb(219, 65, 5);
+$dark-grey: #2e2e2e;
+
+* {
+	font-family: Arial;
+	color: $dark-grey;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 8px;
+}
+
+a {
+	cursor: pointer;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	display: flex;
+}
+
+table {
+	width: 100%;
+	background: $orange;
+	th, td {
+		padding: 8px;
+	}
+	th {
+		text-align: left;
+		height: 5px;
+		h4 {
+			color: #fff;
+			letter-spacing: 6px;
+			span {
+				color: $dark-grey;
+			}
+		}
+	}
+	td {
+		background: #fff;
+		img {
+			height: 1em;
+		}
+	}
+}
+
+ul, #cont {
+	overflow: auto;
+}
+
+#side {
+	background: $orange;
+	display: flex;
+	flex-direction: column;
+	width: 260px;
+}
+
+#cont {
+	flex-grow: 1;
+	padding: 8px;
+	> * {
+		margin: 8px;
+	}
+}
+
+#logo {
+	background: #fff;
+	span {
+		color: $orange;
+	}
+}
+
+ul {
+	margin: 0;
+	padding: 8px;
+	li {
+		padding: 8px;
+		font-weight: bold;
+		list-style-position: inside;
+		&:not(#active) {
+			list-style: none;
+		}
+	}
+}
+
+#vid {
+	margin-top: auto;
+	background: $dark-grey;
+	#player {
+		margin-top: auto;
+		margin: 8px;
+		padding: 8px;
+		cursor: pointer;
+	}
+	#prog {
+		height: 4px;
+		display: inline-block;
+		margin: 8px;
+		background: $orange;
+	}
+}
