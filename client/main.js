@@ -91,4 +91,20 @@ $(document).ready(function() {
 	}
 
 	// ctrl
+	$(document).on('keydown', function(e) {
+		switch(e.which) {
+			case 32: // space
+				e.preventDefault();
+
+				if (player.getPlayerState() == 1) { // playing
+					player.pauseVideo();
+				}
+
+				if (player.getPlayerState() == 5 || player.getPlayerState() == 2) { // cued, paused
+					player.playVideo();
+				}
+
+				break;
+		}
+	});
 });
