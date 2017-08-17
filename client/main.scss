@@ -91,16 +91,16 @@ ul {
 #vid {
 	margin-top: auto;
 	background: $dark-grey;
+	padding: 8px;
 	#player {
 		margin-top: auto;
 		margin: 8px;
-		padding: 8px;
 		cursor: pointer;
 	}
 	#prog {
 		height: 4px;
 		width: 0;
-		margin: 16px;
+		margin: 8px;
 		background: $orange;
 	}
 }

@@ -5,25 +5,68 @@ import './main.html';
 
 $(document).ready(function() {
 	var step = [
-		'Pre-Build',
-		'CPU',
-		'Cooling',
-		'RAM',
-		'Case',
-		'Motherboard',
-		'PSU',
-		'SSD',
-		'GPU',
-		'Cables',
-		'Peripherals',
-		'Setup',
-		'Results'
+		{
+			name: 'Overview',
+			ts: 0
+		},
+		{
+			name: 'Pre-Build',
+				ts: 80
+		},
+		{
+			name: 'CPU',
+			ts: 120
+		},
+		{
+			name: 'Cooling',
+			ts: 184
+		},
+		{
+			name: 'RAM',
+			ts: 249
+		},
+		{
+			name: 'Case',
+			ts: 290
+		},
+		{
+			name: 'Motherboard',
+			ts: 342
+		},
+		{
+			name: 'PSU',
+			ts: 419
+		},
+		{
+			name: 'SSD',
+			ts: 488
+		},
+		{
+			name: 'GPU',
+			ts: 547
+		},
+		{
+			name: 'Cables',
+			ts: 631
+		},
+		{
+			name: 'Peripherals',
+			ts: 658
+		},
+		{
+			name: 'Setup',
+			ts: 722
+		},
+		{
+			name: 'Results',
+			ts: 778
+		}
 	]
 
 	$.each(step, function(i, el) {
-		$('#side ul').append('<li><a>' + el + '</a></li>');
+		$('#side ul').append('<li><a>' + el["name"] + '</a></li>');
 
-		$('#cont').append('<div class="step"><h2>' + el + '</h2></div>');
+		$('#cont').append('<div class="step"><h2>' + el["name"] + '</h2></div>');
 	});
 
 	$('#side ul li').first().attr('id', 'active');
@@ -38,7 +81,7 @@ $(document).ready(function() {
 		var len = $('#side ul li').length;
 		var wd = 100 / (len * (i + 1));
 
-		$('#prog').css('width', 'calc(' + wd + '% - 16px)'); // not accurate, overflow
+		player.seekTo(step[i]['ts']);
 
 		var container = $('#cont'),
 			scrollTo = $('.step:nth-of-type(' + (i + 1) + ')');
@@ -58,7 +101,7 @@ $(document).ready(function() {
 		player = new YT.Player('player', {
 			videoId: 'vbDiSMQ_L_k',
 			width: '228px',
-			height: '119.25px',
+			height: '128.25px',
 			playerVars: {
 				showinfo: 0,
 				controls: 0
@@ -79,7 +122,7 @@ $(document).ready(function() {
 
 				var wd = currentTime / duration * 100;
 
-				$('#prog').css('width', wd + '%');
+				$('#prog').css('width', 'calc(' + wd + '% - 32px)'); // padding
 			}, 1000);
 		} else if (player.getPlayerState() == 5 || player.getPlayerState() == 2) { // cued, paused
 			clearInterval(refresh_interval_id);
