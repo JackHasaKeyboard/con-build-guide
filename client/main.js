@@ -122,7 +122,7 @@ $(document).ready(function() {
 
 				var wd = currentTime / duration * 100;
 
-				$('#prog').css('width', 'calc(' + wd + '% - 32px)'); // padding
+				$('#prog #bar').css('width', wd + '%');
 			}, 1000);
 		} else if (player.getPlayerState() == 5 || player.getPlayerState() == 2) { // cued, paused
 			clearInterval(refresh_interval_id);
