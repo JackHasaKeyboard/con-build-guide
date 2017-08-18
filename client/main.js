@@ -73,26 +73,6 @@ $(document).ready(function() {
 
 	$('#side ul li').first().attr('id', 'active');
 
-	$('li').click(function() {
-		$('li').removeAttr('id');
-
-		$(this).attr('id', 'active');
-
-		var i = $(this).index();
-
-		var len = $('#side ul li').length;
-		var wd = 100 / (len * (i + 1));
-
-		player.seekTo(step[i]['ts']);
-
-		var container = $('#cont'),
-			scrollTo = $('.step:nth-of-type(' + (i + 1) + ')');
-
-		container.animate({
-			scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop() - 8 // padding
-		});
-	});
-
 	// player
 	window.onYouTubePlayerAPIReady = function() {
 		player = new YT.Player('player', {
@@ -110,7 +90,7 @@ $(document).ready(function() {
 		});
 	}
 
-	function onPlayerReady(event) {
+	function onPlayerReady(e) {
 		$.ajax({
 			url: 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=' + key + '&part=snippet,contentDetails',
 			dataType: 'json',
@@ -130,9 +110,9 @@ $(document).ready(function() {
 
 	var done = false;
 
-	function onPlayerStateChange(event) {
+	function onPlayerStateChange(e) {
 		if (player.getPlayerState() == 1) { // playing
-			refresh_interval_id = setInterval(function () {
+			updateProg = setInterval(function() {
 				var duration = player.getDuration();
 				var currentTime = player.getCurrentTime();
 
@@ -141,11 +121,31 @@ $(document).ready(function() {
 				$('#prog #bar').css('width', wd + '%');
 			}, 1000);
 		} else if (player.getPlayerState() == 5 || player.getPlayerState() == 2) { // cued, paused
-			clearInterval(refresh_interval_id);
+			clearInterval(updateProg);
 		}
 	}
 
 	// ctrl
+	$('li').click(function() {
+		$('li').removeAttr('id');
+
+		$(this).attr('id', 'active');
+
+		var i = $(this).index();
+
+		var len = $('#side ul li').length;
+		var wd = 100 / (len * (i + 1));
+
+		player.seekTo(step[i]['ts']);
+
+		var container = $('#cont'),
+			target = $('.step:nth-of-type(' + (i + 1) + ')');
+
+		container.animate({
+			scrollTop: target.offset().top - container.offset().top + container.scrollTop() - 8 // padding
+		});
+	});
+
 	$(document).on('keydown', function(e) {
 		switch(e.which) {
 			case 32: // space
