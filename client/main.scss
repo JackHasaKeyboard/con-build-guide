@@ -35,9 +35,13 @@ table {
 		height: 5px;
 		#price {
 			color: #fff;
-			letter-spacing: 6px;
-			span {
-				color: $dark-grey;
+			> span {
+				padding: 4px;
+			}
+			#total {
+				&:before {
+					content: '$';
+				}
 			}
 		}
 	}

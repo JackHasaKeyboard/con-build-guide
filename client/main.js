@@ -6,6 +6,84 @@ import './main.html';
 $(document).ready(function() {
 	var id = 'vbDiSMQ_L_k';
 
+	var part = [
+		{
+			item: "CPU",
+			name: "Intel Pentium G3258 \"Anniversary Edition\"",
+			price: 179.98
+		},
+		{
+			item: "SSD",
+			name: "Intel 530 series",
+			price: 108.10
+		},
+		{
+			item: "Hard Drive (optional)",
+			name: "Western Digital Green",
+			price: 42.99
+		},
+		{
+			item: "Motherboard",
+			name: "ASUS Z97-C 321.21",
+			price: 321.21
+		},
+		{
+			item: "Case",
+			name: "Corsair Spec",
+			price: 69.99
+		},
+		{
+			item: "Video Card",
+			name: "Radeon R7 260X",
+			price: 287.62
+		},
+		{
+			item: "RAM",
+			name: "8GB Kingston/Corsair/G.Skill/OtherGoodBrand ",
+			price: 75.68
+		},
+		{
+			item: "Power Supply",
+			name: "Corsair CX Series 430W Semi-Modular",
+			price: 219.69
+		},
+		{
+			item: "Mouse",
+			name: "Corsair M45 mouse",
+			price: 60.17
+		},
+		{
+			item: "Keyboard (approx)",
+			name: "Cheap Keyboard",
+			price: "~50.00"
+
+		},
+		{
+			item: "Monitor",
+			name: "Gaming / Workstation",
+			price: "~150.00"
+		}
+	]
+
+	var total = 0,
+		approx;
+
+	$.each(part, function(i, el) {
+		$('table tbody').append('<tr><td>' + el["item"] + '</td><td>' + el["name"] + '</td><td>' + el["price"] + '</td></tr>');
+
+		if (typeof el['price'] == 'number') {
+			total += el['price']
+		} else if (typeof el['price'] == 'string') {
+			total += parseInt(el['price'].match(/\d+/))
+
+			approx = true;
+		}
+	});
+
+	approx == true ? total = '~' + total : total = total
+
+	$('#price').append('<span id="total">' + total + '</span>');
+
 	var step = [
 		{
 			name: 'Overview',
