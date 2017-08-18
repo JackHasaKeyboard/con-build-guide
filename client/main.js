@@ -145,10 +145,6 @@ $(document).ready(function() {
 		}
 	}
 
-	function stopVideo() {
-		player.stopVideo();
-	}
-
 	// ctrl
 	$(document).on('keydown', function(e) {
 		switch(e.which) {
