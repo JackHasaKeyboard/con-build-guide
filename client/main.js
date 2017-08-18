@@ -4,6 +4,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 $(document).ready(function() {
+	var id = 'vbDiSMQ_L_k';
+
 	var step = [
 		{
 			name: 'Overview',
@@ -11,7 +13,7 @@ $(document).ready(function() {
 		},
 		{
 			name: 'Pre-Build',
-				ts: 80
+			ts: 80
 		},
 		{
 			name: 'CPU',
@@ -66,7 +68,7 @@ $(document).ready(function() {
 	$.each(step, function(i, el) {
 		$('#side ul').append('<li><a>' + el["name"] + '</a></li>');
 
-		$('#cont').append('<div class="step"><h2>' + el["name"] + '</h2></div>');
+		$('#cont').append('<div class="step" id="' + el["name"] + '"><h2>' + el["name"] + '</h2></div>');
 	});
 
 	$('#side ul li').first().attr('id', 'active');
@@ -94,7 +96,7 @@ $(document).ready(function() {
 	// player
 	window.onYouTubePlayerAPIReady = function() {
 		player = new YT.Player('player', {
-			videoId: 'vbDiSMQ_L_k',
+			videoId: id,
 			width: '228px',
 			height: '128.25px',
 			playerVars: {
@@ -102,7 +104,26 @@ $(document).ready(function() {
 				controls: 0
 			},
 			events: {
-				'onStateChange': onPlayerStateChange
+				'onStateChange': onPlayerStateChange,
+				'onReady': onPlayerReady
+			}
+		});
+	}
+
+	function onPlayerReady(event) {
+		$.ajax({
+			url: 'https://www.googleapis.com/youtube/v3/videos?id=' + id + '&key=' + key + '&part=snippet,contentDetails',
+			dataType: 'json',
+			async: false,
+			success: function(data) {
+				title = data.items[0].snippet.title;
+				date = moment(data.items[0].snippet.publishedAt).format('LL');
+				desc = data.items[0].snippet.description;
+
+				$('title').text(title + ' -  Linus Tech Tips');
+				$('#title').prepend(title);
+
+				$('#date').text(date);
 			}
 		});
 	}
