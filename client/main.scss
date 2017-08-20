@@ -67,11 +67,11 @@ ul, #cont {
 #cont {
 	flex-grow: 1;
 	padding: 8px;
-	> * {
+	.step {
 		margin: 8px;
-	}
-	p {
-		padding: 8px;
+		.desc {
+			padding: 8px;
+		}
 	}
 }
 

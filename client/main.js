@@ -227,7 +227,7 @@ $(document).ready(function() {
 	$.each(step, function(i, el) {
 		$('#side ul').append('<li><a>' + el["name"] + '</a></li>');
 
-		$('#cont').append('<div class="step" id="' + el["name"] + '"><h2>' + el["name"] + '</h2><p>' + el["desc"] + '</p></div>');
+		$('#cont').append('<div class="step" id="' + el["name"] + '"><h2>' + el["name"] + '</h2><div class="desc">' + el["desc"] + '</div></div>');
 	});
 
 	$('#side ul li').first().attr('id', 'active');
