@@ -71,6 +71,9 @@ ul, #cont {
 		margin: 8px;
 		.desc {
 			padding: 8px;
+			a {
+				color: $orange;
+			}
 		}
 	}
 }
